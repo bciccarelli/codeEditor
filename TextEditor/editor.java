@@ -12,7 +12,7 @@ public class editor {
 	public static String codeText = "";
 	public static void syntax(){
 		System.out.println(codeText);
-		code.setText("<div style='color:white'>"+codeText.replace(" ","&nbsp;").replace("\n","<br>").replace("def","<a style='color:purple'>def</a>")+"</div>");
+		code.setText("<div style='color:white; font-size:14px; font-family: Courier New'>"+codeText.replace(" ","&nbsp;").replace("\n","<br>").replace("def","<a style='color:purple'>def</a>")+"</div>");
 	}
     public static void buildFrame(){
     	JFrame frame = new JFrame("Code Editor");
@@ -44,22 +44,28 @@ public class editor {
 	        @Override
 	        public void keyTyped(KeyEvent e) {
 
-	        	if(e.getKeyChar()==KeyEvent.VK_BACK_SPACE) {
-	        		if(codeText.length()>0) {
-	        			codeText=codeText.substring(0,codeText.length()-1);
-	        		}
-	        	} else if(e.getKeyChar()==KeyEvent.VK_ENTER) {
-	        		codeText+='\n';
-	        	} else if(e.getKeyChar()==KeyEvent.VK_TAB) {
-	        		codeText+="  ";
-	        	} else {
-	       			codeText+=e.getKeyChar();
-	        	}
 
 	        }
 	        @Override
 	        public void keyPressed(KeyEvent e) {
-	        
+	        	
+	        	switch (e.getKeyChar()) {
+	        		case KeyEvent.VK_BACK_SPACE: 
+	        			if(codeText.length()>0) {
+	        				codeText=codeText.substring(0,codeText.length()-1);
+	        			}
+	        			break;
+	        		case KeyEvent.VK_ENTER: 
+	        			codeText+='\n';
+	        			break;
+	        		case KeyEvent.VK_TAB: 
+	        			codeText+="  ";
+	        			break;
+	        		default:
+	       				codeText+=e.getKeyChar();
+	        			break;
+	        	}
+	        	
 	        }
 
 	        @Override
